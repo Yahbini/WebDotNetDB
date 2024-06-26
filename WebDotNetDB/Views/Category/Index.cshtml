@@ -1,0 +1,24 @@
+﻿<h3>Index</h3>
+
+<form asp-action="searchByKeyWord" asp-controller="category" method="get">
+    find category by keyword: <input name="keyword" value="@ViewBag.keyword"/>
+    <button type="submit">Search</button>
+</form>
+
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var item in ViewBag.categories)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+            <td>
+                <a asp-action="details" asp-controller="category" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+    }
+</table>

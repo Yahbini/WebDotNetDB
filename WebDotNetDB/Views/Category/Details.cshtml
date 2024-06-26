@@ -1,0 +1,23 @@
+﻿<h3>Category Info</h3>
+id: @ViewBag.category.Id
+<br />
+name: @ViewBag.category.Name
+
+<h4>Porduct List</h4>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    @foreach (var product in ViewBag.category.Products)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+        </tr>
+    }
+</table>
+
