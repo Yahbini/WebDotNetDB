@@ -10,6 +10,8 @@ builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(c
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>();
 builder.Services.AddScoped<CategoryService, CategoryServiceImpl>();
+builder.Services.AddScoped<AccountService, AccountServiceImpl>();
+
 
 
 var app = builder.Build();

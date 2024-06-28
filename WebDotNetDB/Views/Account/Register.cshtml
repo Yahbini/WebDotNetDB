@@ -1,0 +1,65 @@
+﻿@model WebDotNetDB.Models.Account
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#dob").datepicker({
+            dateFormat: 'mm/dd/yy'
+        });
+    });
+</script>
+
+@TempData["Msg"]
+<a asp-action="login" asp-controller="account">Back</a>
+<h3>Register</h3>
+<form method="post" asp-controller="account" asp-action="register" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>
+                <input type="text" asp-for="Id" />
+            </td>
+        </tr>
+        <tr>
+            <td>Username</td>
+            <td>
+                <input type="text" asp-for="Username" />
+            </td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td>
+                <input type="password" asp-for="Password" />
+            </td>
+        </tr>
+        <tr>
+            <td>Fullname</td>
+            <td>
+                <input type="text" asp-for="FullName" />
+            </td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <input type="text" asp-for="Email" />
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Dob</td>
+            <td>
+                <input type="text" asp-for="Dob" asp-format="{0:MM/dd/yyyy}" id="dob"/>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <button type="submit">Save</button>
+            </td>
+        </tr>
+    </table>
+</form>
+

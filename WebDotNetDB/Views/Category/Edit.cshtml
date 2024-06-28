@@ -1,0 +1,25 @@
+﻿@model WebDotNetDB.Models.Category
+
+
+<h3>Edit category</h3>
+<form method="post" asp-controller="category" asp-action="edit">
+    <table>
+    <tr>
+        <td>Name</td>
+        <td>
+            <input type="text" asp-for="Name"/>
+        </td>
+        <td>
+            <span asp-validation-for="Name"></span>
+        </td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>
+            <button type="submit">Save</button>
+            <input type="hidden" asp-for="Id"/>
+        </td>
+        
+    </tr>
+</table>
+</form>

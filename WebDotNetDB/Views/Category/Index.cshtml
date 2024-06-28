@@ -1,9 +1,16 @@
 ﻿<h3>Index</h3>
 
 <form asp-action="searchByKeyWord" asp-controller="category" method="get">
-    find category by keyword: <input name="keyword" value="@ViewBag.keyword"/>
+    find category by keyword: <input name="keyword" value="@ViewBag.keyword" />
     <button type="submit">Search</button>
 </form>
+
+<a asp-action="add" asp-controller="category">Add</a>
+
+<br />
+<br />
+
+@TempData["Msg"]
 
 <table border="1">
     <tr>
@@ -17,7 +24,11 @@
             <td>@item.Id</td>
             <td>@item.Name</td>
             <td>
-                <a asp-action="details" asp-controller="category" asp-route-id="@item.Id">Details</a>
+                <a asp-action="details" asp-controller="category" asp-route-id="@item.Id">Details</a> | 
+                <a asp-action="delete" asp-controller="category" asp-route-id="@item.Id" onclick="return confirm('Are you sure?')">Delete</a> | 
+                <a asp-action="edit" asp-controller="category" asp-route-id="@item.Id">Edit</a> 
+
+
             </td>
         </tr>
     }

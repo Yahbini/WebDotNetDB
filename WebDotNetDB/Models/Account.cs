@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WebDotNetDB.Models;
+﻿namespace WebDotNetDB.Models;
 
 public partial class Account
 {
@@ -17,7 +14,7 @@ public partial class Account
 
     public bool Status { get; set; }
 
-    public DateOnly Dob { get; set; }
+    public DateTime Dob { get; set; }
 
     public string? SecurityCode { get; set; }
 
