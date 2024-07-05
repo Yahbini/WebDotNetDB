@@ -1,0 +1,83 @@
+﻿@model WebDotNetDB.Models.Product
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $("#created").datepicker({
+            dateFormat: 'mm/dd/yy'
+        });
+    });
+</script>
+
+<a asp-controller="product" asp-action="index">Back</a>
+
+<h3>Edit</h3>
+
+@TempData["Msg"]
+<form method="post" asp-controller="product" asp-action="add" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" asp-for="Name" />
+            </td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td>
+                <input type="text" asp-for="Price" />
+            </td>
+        </tr>
+        <tr>
+            <td>Quantity</td>
+            <td>
+                <input type="text" asp-for="Quantity" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">Description</td>
+            <td>
+                <textarea cols="20" rows="5" asp-for="Description"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Created</td>
+            <td>
+                <input type="text" asp-for="Created" asp-format="{0:MM/dd/yyyy}" id="created" />
+            </td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>
+                <input type="checkbox" asp-for="Status" />
+            </td>
+        </tr>
+        <tr>
+            <td>Photo</td>
+            <td>
+                <input type="file" name="file" />
+                <br />
+                xxxxxxxx
+            </td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                <select asp-for="CategoryId">
+                    @foreach (var category in ViewBag.categories)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <button type="submit">Save</button>
+            </td>
+        </tr>
+    </table>
+</form>

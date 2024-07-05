@@ -14,7 +14,7 @@ public class AccountController : Controller
     }
 
     [HttpGet]
-    [Route("~/")]
+    //[Route("~/")]
     [Route("")]
     [Route("login")]
     public IActionResult Login()
@@ -28,6 +28,7 @@ public class AccountController : Controller
     {
         if (accountService.Login(username, password))
         {
+            HttpContext.Session.SetString("username", username);
             return RedirectToAction("welcome");
         }
         else
@@ -68,5 +69,44 @@ public class AccountController : Controller
     public IActionResult Welcome()
     {
         return View("Welcome");
+    }
+
+    [Route("logout")]
+    public IActionResult Logout()
+    {
+        HttpContext.Session.Remove("username");
+        return RedirectToAction("login");
+    }
+
+    [HttpGet]
+    [Route("profile")]
+    public IActionResult Profile()
+    {
+        var username = HttpContext.Session.GetString("username");
+        var account = accountService.FindByUsername(username);
+        return View("Profile", account);
+    }
+
+    [HttpPost]
+    [Route("profile")]
+    public IActionResult Profile(Account account)
+    {
+        var username = HttpContext.Session.GetString("username");
+        var curentAccount = accountService.FindByUsername(username);
+        if (!string.IsNullOrEmpty(account.Password))
+        {
+            curentAccount.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
+        }
+        curentAccount.FullName = account.FullName;
+        curentAccount.Dob = account.Dob;
+        if (accountService.Update(curentAccount))
+        {
+            return RedirectToAction("login");
+        }
+        else
+        {
+            TempData["Msg"] = "Failed";
+            return RedirectToAction("profile");
+        }
     }
 }

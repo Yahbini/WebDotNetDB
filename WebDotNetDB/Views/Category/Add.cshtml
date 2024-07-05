@@ -4,21 +4,21 @@
 <h3>Add category</h3>
 <form method="post" asp-controller="category" asp-action="add">
     <table>
-    <tr>
-        <td>Name</td>
-        <td>
-            <input type="text" asp-for="Name"/>
-        </td>
-        <td>
-            <span asp-validation-for="Name"></span>
-        </td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td>
-            <button type="submit">Save</button>
-        </td>
-        
-    </tr>
-</table>
+        <tr>
+            <td>Name</td>
+            <td>
+                <input type="text" asp-for="Name" />
+            </td>
+            <td>
+                <span asp-validation-for="Name"></span>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <button type="submit">Save</button>
+            </td>
+
+        </tr>
+    </table>
 </form>

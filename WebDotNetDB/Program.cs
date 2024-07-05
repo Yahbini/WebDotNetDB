@@ -4,19 +4,24 @@ using WebDotNetDB.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connectionString = builder.Configuration.GetConnectionString("ConnectionStrings:DefaultConnection");
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
+string connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"].ToString();
+builder.Services.AddDbContext<DatabaseContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DatabaseContext>();
 builder.Services.AddScoped<CategoryService, CategoryServiceImpl>();
 builder.Services.AddScoped<AccountService, AccountServiceImpl>();
+builder.Services.AddScoped<ProductService, ProductServiceImpl>();
+
+
+builder.Services.AddSession();
 
 
 
 var app = builder.Build();
 
 app.UseStaticFiles();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "myareas",

@@ -1,0 +1,37 @@
+﻿<a asp-controller="product" asp-action="add">Add</a>
+
+<h4>Product List</h4>
+@TempData["Msg"]
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        <th>Created</th>
+        <th>Photo</th>
+        <th>Category Id</th>
+        <th>Category Name</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var product in ViewBag.products)
+    {
+        <tr>
+            <td>@product.Id</td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+            <td>@product.Quantity</td>
+            <td>@(product.Status ? "Show" : "Hide")</td>
+            <td>@product.Created.ToString("dd/MM/yyyy")</td>
+            <td>
+                <img src="~/images/@product.Photo" width="70" height="70" />
+            </td>
+            <td>@product.CategoryId</td>
+            <td>@product.Category.Name</td>
+            <td>
+                <a asp-controller="product" asp-action="edit" asp-route-id="@product.Id">Edit</a>
+            </td>
+        </tr>
+    }
+</table>

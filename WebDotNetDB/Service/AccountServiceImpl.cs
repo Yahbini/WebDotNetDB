@@ -1,6 +1,5 @@
 ﻿using WebDotNetDB.Models;
 
-
 namespace WebDotNetDB.Service;
 
 public class AccountServiceImpl : AccountService
@@ -25,6 +24,11 @@ public class AccountServiceImpl : AccountService
         }
     }
 
+    public Account FindByUsername(string username)
+    {
+        return dbContext.Accounts.SingleOrDefault(a => a.Username == username);
+    }
+
     public bool Login(string username, string password)
     {
         var account = dbContext.Accounts.SingleOrDefault(a => a.Username == username && a.Status);
@@ -34,5 +38,18 @@ public class AccountServiceImpl : AccountService
         }
 
         return false;
+    }
+
+    public bool Update(Account account)
+    {
+        try
+        {
+            dbContext.Entry(account).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            return dbContext.SaveChanges() > 0;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }
